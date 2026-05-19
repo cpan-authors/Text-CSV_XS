@@ -1,12 +1,12 @@
 #!/pro/bin/perl
 
 # csv2xlsx: Convert csv to xlsx
-#	   (m)'23 Copyright H.M.Brand 2007-2026
+#	   (m)'26 Copyright H.M.Brand 2007-2026
 
 use 5.014000;
 use warnings;
 
-our $VERSION = "1.23 - 2023-11-14";
+our $VERSION = "1.24 - 2026-05-19";
 
 sub usage {
     my $err = shift and select STDERR;
@@ -356,7 +356,9 @@ foreach my $csvf (@args) {
 	    }
 
 	unless ($wks) {
-	    $wks = $wbk->add_worksheet ($sheetname);
+	    # characters []:*/\ are not allowed in sheet names
+	    my sn = $sheetname =~ tr{[]:*?/\\}{_}r =~ s{__+}{_}gr;
+	    $wks = $wbk->add_worksheet ($sn);
 	    $utf && !$wks->can ("write_unicode") and $utf = 0;
 	    ($h, $w, @w) = (0, 1);
 	    }
