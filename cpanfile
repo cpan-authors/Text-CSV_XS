@@ -1,7 +1,7 @@
 requires   "IO::Handle";
 requires   "XSLoader";
 
-recommends "Encode"                   => "3.24";
+recommends "Encode"                   => "3.25";
 
 on "configure" => sub {
     requires   "ExtUtils::MakeMaker";
