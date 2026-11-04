@@ -730,6 +730,7 @@ sub error_diag {
 	$diag[5] =     $self->{'_ERROR_SRC'} if exists $self->{'_ERROR_SRC'} && $self->{'diag_verbose'};
 
 	$diag[0] && $self->{'callbacks'} && $self->{'callbacks'}{'error'} and
+	  $diag[0] != 2012 and # Do not invoke on EOF
 	    return $self->{'callbacks'}{'error'}->(@diag);
 	}
 
@@ -4172,9 +4173,9 @@ X<error>
 
  $csv->callbacks (error => sub { $csv->SetDiag (0) });
 
-the C<error>  callback is invoked when an error occurs,  but  I<only>  when
-L</auto_diag> is set to a true value. A callback is invoked with the values
-returned by L</error_diag>:
+the C<error> callback is invoked when an error (other than C<EOF> / C<2012>)
+occurs, but I<only> when L</auto_diag> is set to a true value. The callback
+is invoked with the values returned by L</error_diag>:
 
  my ($c, $s);
 
@@ -4513,7 +4514,7 @@ It can be used for ignoring errors as well as for just keeping the error in
 case of analysis after the C<csv ()> function has returned.
 
  my @err;
- my $aoa = csv (in => "bad.csv, on_error => sub { @err = @_ });
+ my $aoa = csv (in => "bad.csv", on_error => sub { @err = @_ });
  die Text::CSV_XS->error_diag if @err or !$aoa;
 
 =back

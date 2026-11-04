@@ -2297,9 +2297,9 @@ FUNCTIONS
        error
           $csv->callbacks (error => sub { $csv->SetDiag (0) });
 
-         the "error"  callback is invoked when an error occurs,  but  only
-         when "auto_diag" is set to a true value. A callback is invoked with
-         the values returned by "error_diag":
+         the "error" callback is invoked when an error (other than "EOF" /
+         2012) occurs, but only when "auto_diag" is set to a true value. The
+         callback is invoked with the values returned by "error_diag":
 
           my ($c, $s);
 
@@ -2609,7 +2609,7 @@ FUNCTIONS
          error in case of analysis after the "csv ()" function has returned.
 
           my @err;
-          my $aoa = csv (in => "bad.csv, on_error => sub { @err = @_ });
+          my $aoa = csv (in => "bad.csv", on_error => sub { @err = @_ });
           die Text::CSV_XS->error_diag if @err or !$aoa;
 
 INTERNALS
@@ -3299,4 +3299,4 @@ COPYRIGHT AND LICENSE
        This library is free software;  you can redistribute and/or modify it
        under the same terms as Perl itself.
 
-perl v5.44.0                      2026-10-15                         CSV_XS(3)
+perl v5.44.0                      2026-11-04                         CSV_XS(3)

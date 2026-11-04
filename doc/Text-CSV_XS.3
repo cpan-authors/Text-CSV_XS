@@ -55,7 +55,7 @@
 .\" ========================================================================
 .\"
 .IX Title "CSV_XS 3"
-.TH CSV_XS 3 2026-10-15 "perl v5.44.0" "User Contributed Perl Documentation"
+.TH CSV_XS 3 2026-11-04 "perl v5.44.0" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification. Always turn off hyphenation. String
 .\" and register settings are required by groff 1.23.0 and later. Changing
 .\" tag separation back to 1n is required by groff 1.24.0 and later.
@@ -2954,9 +2954,9 @@ error
 \& $csv\->callbacks (error => sub { $csv\->SetDiag (0) });
 .Ve
 .Sp
-the \f(CR\*(C`error\*(C'\fR  callback is invoked when an error occurs,  but  \fIonly\fR  when
-"auto_diag" is set to a true value. A callback is invoked with the values
-returned by "error_diag":
+the \f(CR\*(C`error\*(C'\fR callback is invoked when an error (other than \f(CR\*(C`EOF\*(C'\fR / \f(CR2012\fR)
+occurs, but \fIonly\fR when "auto_diag" is set to a true value. The callback
+is invoked with the values returned by "error_diag":
 .Sp
 .Vb 1
 \& my ($c, $s);
@@ -3347,7 +3347,7 @@ case of analysis after the \f(CR\*(C`csv ()\*(C'\fR function has returned.
 .Sp
 .Vb 3
 \& my @err;
-\& my $aoa = csv (in => "bad.csv, on_error => sub { @err = @_ });
+\& my $aoa = csv (in => "bad.csv", on_error => sub { @err = @_ });
 \& die Text::CSV_XS\->error_diag if @err or !$aoa;
 .Ve
 .SH INTERNALS

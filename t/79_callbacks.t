@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
- use Test::More tests => 111;
+ use Test::More tests => 109;
 #use Test::More "no_plan";
 
 BEGIN {
@@ -123,7 +123,7 @@ ok (my $row = $csv->getline (*DATA),	"get row");
 is_deeply ($row, [ 1, 2, 3, "NEW" ],	"fetch + value from hook");
 
 $error = 2012; # EOF
-ok ($csv->getline (*DATA),		"parse past eof");
+is ($csv->getline (*DATA), undef,	"parse past eof");
 
 ok ($csv->eol ("\n"), "eol for output");
 open my $fh, ">", $tfn or die "$tfn: $!";

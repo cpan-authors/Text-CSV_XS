@@ -2431,9 +2431,9 @@ or enhance the ["csv"](#csv) function.
 
         $csv->callbacks (error => sub { $csv->SetDiag (0) });
 
-    the `error`  callback is invoked when an error occurs,  but  _only_  when
-    ["auto\_diag"](#auto_diag) is set to a true value. A callback is invoked with the values
-    returned by ["error\_diag"](#error_diag):
+    the `error` callback is invoked when an error (other than `EOF` / `2012`)
+    occurs, but _only_ when ["auto\_diag"](#auto_diag) is set to a true value. The callback
+    is invoked with the values returned by ["error\_diag"](#error_diag):
 
         my ($c, $s);
 
@@ -2756,7 +2756,7 @@ but only feature the ["csv"](#csv) function.
     case of analysis after the `csv ()` function has returned.
 
         my @err;
-        my $aoa = csv (in => "bad.csv, on_error => sub { @err = @_ });
+        my $aoa = csv (in => "bad.csv", on_error => sub { @err = @_ });
         die Text::CSV_XS->error_diag if @err or !$aoa;
 
 # INTERNALS

@@ -2240,7 +2240,7 @@ my $aoa = csv (in =&gt; $fh, csv =&gt; $csv);</code></pre>
 
 <pre><code>$csv-&gt;callbacks (error =&gt; sub { $csv-&gt;SetDiag (0) });</code></pre>
 
-<p>the <code>error</code> callback is invoked when an error occurs, but <i>only</i> when <a href="#auto_diag">&quot;auto_diag&quot;</a> is set to a true value. A callback is invoked with the values returned by <a href="#error_diag">&quot;error_diag&quot;</a>:</p>
+<p>the <code>error</code> callback is invoked when an error (other than <code>EOF</code> / <code>2012</code>) occurs, but <i>only</i> when <a href="#auto_diag">&quot;auto_diag&quot;</a> is set to a true value. The callback is invoked with the values returned by <a href="#error_diag">&quot;error_diag&quot;</a>:</p>
 
 <pre><code>my ($c, $s);
 
@@ -2569,7 +2569,7 @@ my $aoa = csv (in =&gt; $fh, on_error =&gt; sub { @err = @_ });</code></pre>
 <p>It can be used for ignoring errors as well as for just keeping the error in case of analysis after the <code>csv ()</code> function has returned.</p>
 
 <pre><code>my @err;
-my $aoa = csv (in =&gt; &quot;bad.csv, on_error =&gt; sub { @err = @_ });
+my $aoa = csv (in =&gt; &quot;bad.csv&quot;, on_error =&gt; sub { @err = @_ });
 die Text::CSV_XS-&gt;error_diag if @err or !$aoa;</code></pre>
 
 </dd>
