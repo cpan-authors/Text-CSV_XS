@@ -1307,7 +1307,7 @@ sub _csv_attr {
 	$attr{'callbacks'}{'after_parse'} = $cbai; $cbai = undef;
 	$attr{'callbacks'}{'before_out'}  = $cbbo; $cbbo = undef;
 	$attr{'callbacks'}{'on_in'}       = $cboi; $cboi = undef;
-	$attr{'callbacks'}{'on_error'}    = $cboe; $cboe = undef;
+	$attr{'callbacks'}{'error'}       = $cboe; $cboe = undef;
 	$out  = undef;
 	$sink = 1;
 	}

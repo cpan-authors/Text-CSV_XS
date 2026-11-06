@@ -1,5 +1,6 @@
-1.66	- 2026-11-04, H.Merijn Brand
+1.66	- 2026-11-06, H.Merijn Brand
     * Exclude EOF/2012 from calling error callback (issue 69)
+    * Fix location for csv (on_error => ...)
 
 1.65	- 2026-10-15, H.Merijn Brand
     * CPAN.org does not forward email anymore
